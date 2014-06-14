@@ -7,7 +7,6 @@ CRITICAL_RESERVE_AMT, MAX_RESERVE_AMT = 0, 100
 RESERVE_STATES = (MAX_RESERVE_AMT - CRITICAL_RESERVE_AMT) + 1
 STARTING_RESERVES = MAX_RESERVE_AMT * 0.25
 
-
 class Patch(object):
     def __init__(self, index, food_value=0, foraging_success_rate=0, mortality_rate=0, visiting_cost=3):
         self.index, self.food_value, self.foraging_success_rate = index, food_value, foraging_success_rate
@@ -32,6 +31,7 @@ PATCHES = [ Patch(index=1, food_value=8, foraging_success_rate=0.5, mortality_ra
 def fitness_function(reserve_level):
     surplus = reserve_level - CRITICAL_RESERVE_AMT
     return ASYMPTOTIC_FITNESS * (surplus / (surplus + STARTING_RESERVES))
+
 
 fitness = np.zeros((RESERVE_STATES, BREEDING_SEASON_LENGTH))
 decision = np.zeros((RESERVE_STATES, BREEDING_SEASON_LENGTH), dtype=np.int)
